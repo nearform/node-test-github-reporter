@@ -1,25 +1,33 @@
 {
-  "name": "hub-template",
+  "name": "node-test-github-summary",
   "version": "1.0.0",
   "description": "Template to start a new repository on the hub",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "test": "echo \"Error: no test specified\" && exit 0",
+    "test": "node --test ./test/",
+    "test:ci": "node --test --test-reporter spec --test-reporter-destination stdout --test-reporter ./index.js --test-reporter-destination $GITHUB_STEP_SUMMARY ./test/",
     "prepare": "husky install"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nearform/hub-template.git"
+    "url": "git+https://github.com/nearform/node-test-github-summary.git"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/nearform/hub-template/issues"
+  "author": {
+    "name": "Romulo Vitoi",
+    "email": "romulo.vitoi@nearform.com"
   },
-  "homepage": "https://github.com/nearform/hub-template#readme",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nearform/node-test-github-summary/issues"
+  },
+  "homepage": "https://github.com/nearform/node-test-github-summary#readme",
+  "dependencies": {
+    "@actions/core": "^1.10.0",
+    "node-test-parser": "git://github.com/nearform/node-test-parser.git"
+  },
   "devDependencies": {
     "@commitlint/cli": "^17.4.4",
     "@commitlint/config-conventional": "^17.4.4",
