@@ -21,5 +21,5 @@ node --test --test-reporter node-test-github-summary
 You can use it in conjunction with another test report to also get the output in the logs:
 
 ```shell
-node --test --test-reporter spec --test-reporter node-test-github-summary
+node --test --test-reporter spec --test-reporter-destination stdout --test-reporter node-test-github-summary --test-reporter-destination stdout
 ```
