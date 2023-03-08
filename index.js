@@ -29,12 +29,14 @@ export default async function* githubSummaryReporter(source) {
     )
     .join('\n')
 
-  yield summary
+  summary
     .addHeading('Node.js Test Results', 2)
     .addTable([tableHeader, tableRow])
     .addHeading('Details', 3)
     .addRaw(reportDetails)
-    .stringify()
+    .write()
+
+  yield ''
 }
 
 function testDetails(test) {
