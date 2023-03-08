@@ -1,12 +1,32 @@
+# node-test-github-summary
+
+A Github Summary test reporter for the Node.js test runner
+
 ![CI](https://github.com/nearform/node-test-github-summary/actions/workflows/ci.yml/badge.svg?event=push)
 
-# Hub Template
+## Installation
 
-A feature-packed template to start a new repository on the hub, including:
+```shell
+npm i -D node-test-github-summary
+```
 
-- code linting with [ESlint](https://eslint.org) and [prettier](https://prettier.io)
-- pre-commit code linting and commit message linting with [husky](https://www.npmjs.com/package/husky) and [commitlint](https://commitlint.js.org/)
-- dependabot setup with automatic merging thanks to ["merge dependabot" GitHub action](https://github.com/fastify/github-action-merge-dependabot)
-- notifications about commits waiting to be released thanks to ["notify release" GitHub action](https://github.com/nearform/github-action-notify-release)
-- PRs' linked issues check with ["check linked issues" GitHub action](https://github.com/nearform/github-action-check-linked-issues)
-- Continuous Integration GitHub workflow
+## Usage
+
+```shell
+node --test --test-reporter node-test-github-summary --test-reporter-destination $GITHUB_STEP_SUMMARY
+```
+
+`$GITHUB_STEP_SUMMARY` is a variable that is available in GitHub Actions and points to the file that renders the summary.
+
+You can also have a different test reporter output to *stdout* while still saving the JUnit report to a file:
+
+```shell
+node --test --test-reporter spec --test-reporter-destination stdout --test-reporter node-test-github-summary --test-reporter-destination $GITHUB_STEP_SUMMARY
+```
+
+If you already have something in the summary and only needs to append to it instead of replacing the existing file, you can save the output to a different file and then concatenate the results:
+
+```shell
+node --test --test-reporter node-test-github-summary --test-reporter-destination report.md
+cat report.md >> $GITHUB_STEP_SUMMARY
+```
