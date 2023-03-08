@@ -1,8 +1,10 @@
 # node-test-github-summary
 
+![CI](https://github.com/nearform/node-test-github-summary/actions/workflows/ci.yml/badge.svg?event=push)
+
 A Github Summary test reporter for the Node.js test runner
 
-![CI](https://github.com/nearform/node-test-github-summary/actions/workflows/ci.yml/badge.svg?event=push)
+![Summary](docs/summary.png)
 
 ## Installation
 
