@@ -6,6 +6,7 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
+    "test": "./test/e2e/compare.sh",
     "prepare": "husky install"
   },
   "repository": {
