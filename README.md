@@ -1,6 +1,6 @@
-# node-test-github-summary
+# node-test-github-reporter
 
-![CI](https://github.com/nearform/node-test-github-summary/actions/workflows/ci.yml/badge.svg?event=push)
+![CI](https://github.com/nearform/node-test-github-reporter/actions/workflows/ci.yml/badge.svg?event=push)
 
 A Github Summary test reporter for the Node.js test runner
 
@@ -9,17 +9,17 @@ A Github Summary test reporter for the Node.js test runner
 ## Installation
 
 ```shell
-npm i -D node-test-github-summary
+npm i -D node-test-github-reporter
 ```
 
 ## Usage
 
 ```shell
-node --test --test-reporter node-test-github-summary
+node --test --test-reporter node-test-github-reporter
 ```
 
 You can use it in conjunction with another test report to also get the output in the logs:
 
 ```shell
-node --test --test-reporter spec --test-reporter-destination stdout --test-reporter node-test-github-summary --test-reporter-destination stdout
+node --test --test-reporter spec --test-reporter-destination stdout --test-reporter node-test-github-reporter --test-reporter-destination stdout
 ```

@@ -11,13 +11,13 @@
 
 Stack:
 ```
-    at Object.<anonymous> (file:///Users/user/nearform/node-test-github-summary/test/resources/sample-tests/broken.test.js:5:3)
+    at Object.<anonymous> (file:///Users/user/nearform/node-test-github-reporter/test/resources/sample-tests/broken.test.js:5:3)
     at ItTest.runInAsyncScope (node:async_hooks:203:9)
     at ItTest.run (node:internal/test_runner/test:549:25)
     at ItTest.start (node:internal/test_runner/test:465:17)
     at run (node:internal/test_runner/harness:180:15)
     at cb (node:internal/test_runner/harness:185:5)
-    at file:///Users/user/nearform/node-test-github-summary/test/resources/sample-tests/broken.test.js:3:1
+    at file:///Users/user/nearform/node-test-github-reporter/test/resources/sample-tests/broken.test.js:3:1
     at ModuleJob.run (node:internal/modules/esm/module_job:193:25)
 ```
 
@@ -53,7 +53,7 @@ Stack:
 
 Stack:
 ```
-    at Object.<anonymous> (file:///Users/user/nearform/node-test-github-summary/test/resources/sample-tests/nested.test.js:12:16)
+    at Object.<anonymous> (file:///Users/user/nearform/node-test-github-reporter/test/resources/sample-tests/nested.test.js:12:16)
     at ItTest.runInAsyncScope (node:async_hooks:203:9)
     at ItTest.run (node:internal/test_runner/test:549:25)
     at Suite.processPendingSubtests (node:internal/test_runner/test:304:27)

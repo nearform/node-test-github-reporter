@@ -1,5 +1,5 @@
 {
-  "name": "node-test-github-summary",
+  "name": "node-test-github-reporter",
   "version": "1.0.0",
   "description": "Template to start a new repository on the hub",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/nearform/node-test-github-summary.git"
+    "url": "git+https://github.com/nearform/node-test-github-reporter.git"
   },
   "keywords": [],
   "author": {
@@ -20,9 +20,9 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/nearform/node-test-github-summary/issues"
+    "url": "https://github.com/nearform/node-test-github-reporter/issues"
   },
-  "homepage": "https://github.com/nearform/node-test-github-summary#readme",
+  "homepage": "https://github.com/nearform/node-test-github-reporter#readme",
   "dependencies": {
     "@actions/core": "^1.10.0",
     "node-test-parser": "git://github.com/nearform/node-test-parser.git"
