@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/nearform/node-test-github-reporter/actions/workflows/ci.yml/badge.svg?event=push)
 
-A Github Summary test reporter for the Node.js test runner
+A GitHub test reporter for the Node.js test runner
 
 ![Summary](docs/summary.png)
 

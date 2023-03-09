@@ -1,7 +1,7 @@
 {
   "name": "node-test-github-reporter",
   "version": "1.0.0",
-  "description": "Template to start a new repository on the hub",
+  "description": "A GitHub test reporter for the Node.js test runner",
   "main": "index.js",
   "type": "module",
   "scripts": {
@@ -13,7 +13,11 @@
     "type": "git",
     "url": "git+https://github.com/nearform/node-test-github-reporter.git"
   },
-  "keywords": [],
+  "keywords": [
+    "test",
+    "reporter",
+    "github"
+  ],
   "author": {
     "name": "Romulo Vitoi",
     "email": "romulo.vitoi@nearform.com"
