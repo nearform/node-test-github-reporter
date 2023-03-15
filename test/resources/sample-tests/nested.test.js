@@ -8,8 +8,8 @@ describe('module', () => {
         assert.strictEqual(1, 1)
       })
 
-      it('fails', () => {
-        assert.strictEqual(1, 2)
+      it('!fails', () => {
+        assert.strictEqual(1, 1)
       })
     })
   })
