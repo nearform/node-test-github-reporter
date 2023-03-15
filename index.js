@@ -1,6 +1,9 @@
 import path from 'node:path'
 import parseReport from 'node-test-parser'
-import { summary } from '@actions/core'
+import { summary, error as annotateError } from '@actions/core'
+
+const workspace = process.env.GITHUB_WORKSPACE
+const locationRegex = new RegExp(`${workspace}(.*):(\\d+):(\\d+)`)
 
 export default async function* githubSummaryReporter(source) {
   const report = await parseReport(source)
@@ -69,6 +72,11 @@ function formatMessage(test) {
 
   if (error.stack) {
     errorMessage += `\n\nStack:\n\`\`\`\n${error.stack}\n\`\`\`\n`
+
+    const errorLocation = findErrorLocation(error.stack)
+    if (errorLocation) {
+      annotateError(error, errorLocation)
+    }
   }
 
   return errorMessage
@@ -90,5 +98,18 @@ function statusEmoji(test) {
     return ':leftwards_arrow_with_hook:'
   } else {
     return ':white_check_mark:'
+  }
+}
+
+function findErrorLocation(stack) {
+  const [, file, startLine, startColumn] = locationRegex.exec(stack) || []
+  if (!file) {
+    return
+  }
+
+  return {
+    file,
+    startLine,
+    startColumn
   }
 }
