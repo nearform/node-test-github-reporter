@@ -18,7 +18,7 @@ jobs:
       - run: |
           npm ci
           npm run lint
-          npm test
+          npm run test-action
 
   automerge:
     name: Merge dependabot's PRs

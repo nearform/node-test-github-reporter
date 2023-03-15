@@ -7,6 +7,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "./test/e2e/compare.sh",
+    "test-action": "node --test --test-reporter ./index.js ./test/resources/sample-tests",
     "prepare": "husky install"
   },
   "repository": {
