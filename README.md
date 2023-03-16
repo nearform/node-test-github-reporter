@@ -6,6 +6,8 @@ A GitHub test reporter for the Node.js test runner
 
 ![Summary](docs/summary.png)
 
+![Annotation](docs/annotation.png)
+
 ## Installation
 
 ```shell
