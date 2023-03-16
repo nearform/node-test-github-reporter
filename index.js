@@ -1,4 +1,3 @@
-import path from 'node:path'
 import parseReport from 'node-test-parser'
 import { summary, error as annotateError } from '@actions/core'
 
@@ -25,10 +24,7 @@ export default async function* githubSummaryReporter(source) {
 
   const reportDetails = tests
     .map(test =>
-      formatDetails(
-        `${statusEmoji(test)} ${path.basename(test.name)}`,
-        testDetails(test)
-      )
+      formatDetails(`${statusEmoji(test)} ${test.name}`, testDetails(test))
     )
     .join('\n')
 
