@@ -7,7 +7,7 @@ const locationRegex = new RegExp(`${workspace}(.*):(\\d+):(\\d+)`)
 
 export default async function* githubSummaryReporter(source) {
   const report = await parseReport(source)
-  const suites = report.testSuites
+  const tests = report.tests
 
   const tableHeader = [
     { data: 'Passed', header: true },
@@ -17,13 +17,13 @@ export default async function* githubSummaryReporter(source) {
   ]
 
   const tableRow = [
-    `${suites.filter(s => !s.error && !s.failure && !s.skip).length}`,
-    `${suites.filter(s => s.error || s.failure).length}`,
-    `${suites.filter(s => s.skip).length}`,
+    `${tests.filter(s => !s.error && !s.failure && !s.skip).length}`,
+    `${tests.filter(s => s.error || s.failure).length}`,
+    `${tests.filter(s => s.skip).length}`,
     `${parseInt(report.duration)}ms`
   ]
 
-  const reportDetails = suites
+  const reportDetails = tests
     .map(test =>
       formatDetails(
         `${statusEmoji(test)} ${path.basename(test.name)}`,
