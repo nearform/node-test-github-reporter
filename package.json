@@ -29,7 +29,8 @@
   "homepage": "https://github.com/nearform/node-test-github-reporter#readme",
   "dependencies": {
     "@actions/core": "^1.10.0",
-    "node-test-parser": "git://github.com/nearform/node-test-parser.git"
+    "error-stack-parser": "^2.1.4",
+    "node-test-parser": "github:nearform/node-test-parser#v2.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.4.4",
