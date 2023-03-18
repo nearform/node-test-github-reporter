@@ -1,6 +1,6 @@
 {
   "name": "node-test-github-reporter",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A GitHub test reporter for the Node.js test runner",
   "main": "index.js",
   "type": "module",
