@@ -1,9 +1,9 @@
 #!/bin/bash
 set -e
 
-# Function to replace test duration with 0 and remove file paths
+# Function to replace test duration with 0
 remove_variables() {
-  echo "$1" | sed -E 's/[0-9]+ms/0ms/g' | sed -E 's/\/.*\/test\//test\//g'
+  echo "$1" | sed -E 's/[0-9]+ms/0ms/g'
 }
 
 # Create temporary file to hold test summary
