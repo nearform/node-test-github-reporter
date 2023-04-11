@@ -1,9 +1,15 @@
 import { summary, error as annotateError } from '@actions/core'
 import ErrorStackParser from 'error-stack-parser'
 import parseReport from 'node-test-parser'
+import StackUtils from 'stack-utils'
 
 const workspace = process.env.GITHUB_WORKSPACE
 const workspacePrefixRegex = new RegExp(`^${workspace}`)
+
+const stackUtils = new StackUtils({
+  cwd: process.cwd(),
+  internals: StackUtils.nodeInternals()
+})
 
 export default async function* githubSummaryReporter(source) {
   const report = await parseReport(source)
@@ -68,7 +74,8 @@ function formatMessage(test) {
   }
 
   if (error.stack) {
-    errorMessage += `\n\nStack:\n\`\`\`\n${error.stack}\n\`\`\`\n`
+    const cleanStack = stackUtils.clean(error.stack)
+    errorMessage += `\n\nStack:\n\`\`\`\n${cleanStack}\`\`\`\n`
 
     const errorLocation = findErrorLocation(error)
     if (errorLocation) {
