@@ -73,11 +73,11 @@ function formatMessage(test) {
     errorMessage += `\n\n${test.diagnostic}`
   }
 
-  if (error.stack) {
-    const cleanStack = stackUtils.clean(error.stack)
+  if (error.cause && error.cause.stack) {
+    const cleanStack = stackUtils.clean(error.cause.stack)
     errorMessage += `\n\nStack:\n\`\`\`\n${cleanStack}\`\`\`\n`
 
-    const errorLocation = findErrorLocation(error)
+    const errorLocation = findErrorLocation(error.cause)
     if (errorLocation) {
       annotateError(error, errorLocation)
     }

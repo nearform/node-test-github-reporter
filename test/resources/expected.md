@@ -38,9 +38,10 @@ TestContext.<anonymous> (file://test/resources/sample-tests/broken.test.js:5:3)
 
 Stack:
 ```
-TestContext.<anonymous> (file://test/resources/sample-tests/nested.test.js:12:16)
-async Promise.all (index 0)
-async Promise.all (index 0)
+1 !== 2
+    TestContext.<anonymous> (file://test/resources/sample-tests/nested.test.js:12:16)
+    async Promise.all (index 0)
+    async Promise.all (index 0)
 ```
 
   </blockquote>
