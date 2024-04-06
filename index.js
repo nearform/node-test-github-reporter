@@ -1,6 +1,7 @@
 import { summary, error as annotateError } from '@actions/core'
 import ErrorStackParser from 'error-stack-parser'
 import parseReport from 'node-test-parser'
+import url from 'url'
 import StackUtils from 'stack-utils'
 
 const workspace = process.env.GITHUB_WORKSPACE
@@ -118,6 +119,14 @@ function findErrorLocation(error) {
   }
 }
 
-function getRelativeFilePath(path) {
-  return new URL(path).pathname.replace(workspacePrefixRegex, '')
+export function getSafePath(path) {
+  if (path.startsWith('file')) {
+    return path
+  }
+  return url.pathToFileURL(path).href
+}
+
+export function getRelativeFilePath(path) {
+  const filePath = getSafePath(path)
+  return new URL(filePath).pathname.replace(workspacePrefixRegex, '')
 }
