@@ -6,8 +6,9 @@
   "type": "module",
   "scripts": {
     "lint": "eslint .",
-    "test": "./test/e2e/compare.sh",
-    "test-package": "node --test ./test/package-tests/**.test.js",
+    "test": "npm run test:compare && npm run test:package",
+    "test:compare": "./test/e2e/compare.sh",
+    "test:package": "node --test ./test/package-tests/**.test.js",
     "prepare": "husky"
   },
   "repository": {
