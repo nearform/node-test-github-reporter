@@ -97,7 +97,9 @@ function formatDetails(heading, content) {
 }
 
 function statusEmoji(test) {
-  if (test.failure || test.error) {
+  if (test.failure) {
+    return ':boom:'
+  } else if (test.error) {
     return ':x:'
   } else if (test.skip) {
     return ':leftwards_arrow_with_hook:'
