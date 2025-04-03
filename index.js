@@ -14,13 +14,12 @@ const stackUtils = new StackUtils({
 
 export default async function* githubSummaryReporter(source) {
   const report = await parseReport(source)
-  const tests = report.tests;
+  const tests = report.tests
 
   const statistics = {
     passed: 0,
     failed: 0,
-    skipped: 0,
-    get total(){ return this.passed + this.failed + this.skipped }
+    skipped: 0
   }
 
   const tableHeader = [
@@ -30,7 +29,7 @@ export default async function* githubSummaryReporter(source) {
     { data: 'Duration', header: true }
   ]
 
-  const reportDetails = testDetails(statistics, {tests: tests});    
+  const reportDetails = testDetails(statistics, {tests: tests})
 
   const tableRow = [
     `${statistics.passed}`,
@@ -56,25 +55,28 @@ function testDetails(statistics, test) {
 
   return test.tests
     .map(test =>
-      formatDetails(`${statusEmoji(test)} ${test.name}`, testDetails(statistics, test))
+      formatDetails(
+        `${statusEmoji(test)} ${test.name}`,
+        testDetails(statistics, test)
+      )
     )
     .join('\n')
 }
 
 function formatMessage(statistics, test) {
   if (test.skip) {
-    statistics.skipped++;
+    statistics.skipped++
     return 'Test skipped'
   }
 
   const error = test.error || test.failure
   if (!error) {
-    statistics.passed++;
+    statistics.passed++
     return 'Test passed'
   }
-  statistics.failed++;
+  statistics.failed++
 
-  let errorMessage = "\n\n\`\`\`\n" + error.message + "\n\`\`\`";
+  let errorMessage = '\n\n```\n' + error.message + '\n```'
 
   if (test.diagnostic) {
     errorMessage += `\n\n${test.diagnostic}`
@@ -90,7 +92,7 @@ function formatMessage(statistics, test) {
     }
   }
 
-  return errorMessage;
+  return errorMessage
 }
 
 function formatDetails(heading, content) {
