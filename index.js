@@ -14,7 +14,14 @@ const stackUtils = new StackUtils({
 
 export default async function* githubSummaryReporter(source) {
   const report = await parseReport(source)
-  const tests = report.tests
+  const tests = report.tests;
+
+  const statistics = {
+    passed: 0,
+    failed: 0,
+    skipped: 0,
+    get total(){ return this.passed + this.failed + this.skipped }
+  }
 
   const tableHeader = [
     { data: 'Passed', header: true },
@@ -23,18 +30,14 @@ export default async function* githubSummaryReporter(source) {
     { data: 'Duration', header: true }
   ]
 
+  const reportDetails = testDetails(statistics, {tests: tests});    
+
   const tableRow = [
-    `${tests.filter(s => !s.error && !s.failure && !s.skip).length}`,
-    `${tests.filter(s => s.error || s.failure).length}`,
-    `${tests.filter(s => s.skip).length}`,
+    `${statistics.passed}`,
+    `${statistics.failed}`,
+    `${statistics.skipped}`,
     `${parseInt(report.duration)}ms`
   ]
-
-  const reportDetails = tests
-    .map(test =>
-      formatDetails(`${statusEmoji(test)} ${test.name}`, testDetails(test))
-    )
-    .join('\n')
 
   summary
     .addHeading('Node.js Test Results', 2)
@@ -46,29 +49,32 @@ export default async function* githubSummaryReporter(source) {
   yield ''
 }
 
-function testDetails(test) {
+function testDetails(statistics, test) {
   if (!test.tests.length) {
-    return formatMessage(test)
+    return formatMessage(statistics, test)
   }
 
   return test.tests
     .map(test =>
-      formatDetails(`${statusEmoji(test)} ${test.name}`, testDetails(test))
+      formatDetails(`${statusEmoji(test)} ${test.name}`, testDetails(statistics, test))
     )
     .join('\n')
 }
 
-function formatMessage(test) {
+function formatMessage(statistics, test) {
   if (test.skip) {
+    statistics.skipped++;
     return 'Test skipped'
   }
 
   const error = test.error || test.failure
   if (!error) {
+    statistics.passed++;
     return 'Test passed'
   }
+  statistics.failed++;
 
-  let errorMessage = error.message
+  let errorMessage = "\n\n\`\`\`\n" + error.message + "\n\`\`\`";
 
   if (test.diagnostic) {
     errorMessage += `\n\n${test.diagnostic}`
@@ -84,7 +90,7 @@ function formatMessage(test) {
     }
   }
 
-  return errorMessage
+  return errorMessage;
 }
 
 function formatDetails(heading, content) {
