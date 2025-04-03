@@ -16,7 +16,7 @@ export default async function* githubSummaryReporter(source) {
   const report = await parseReport(source)
   const tests = report.tests
 
-  const statistics = {
+  const testCounters = {
     passed: 0,
     failed: 0,
     skipped: 0
@@ -29,12 +29,12 @@ export default async function* githubSummaryReporter(source) {
     { data: 'Duration', header: true }
   ]
 
-  const reportDetails = testDetails(statistics, {tests: tests})
+  const reportDetails = testDetails(testCounters, {tests: tests})
 
   const tableRow = [
-    `${statistics.passed}`,
-    `${statistics.failed}`,
-    `${statistics.skipped}`,
+    `${testCounters.passed}`,
+    `${testCounters.failed}`,
+    `${testCounters.skipped}`,
     `${parseInt(report.duration)}ms`
   ]
 
@@ -48,33 +48,33 @@ export default async function* githubSummaryReporter(source) {
   yield ''
 }
 
-function testDetails(statistics, test) {
+function testDetails(testCounters, test) {
   if (!test.tests.length) {
-    return formatMessage(statistics, test)
+    return formatMessage(testCounters, test)
   }
 
   return test.tests
     .map(test =>
       formatDetails(
         `${statusEmoji(test)} ${test.name}`,
-        testDetails(statistics, test)
+        testDetails(testCounters, test)
       )
     )
     .join('\n')
 }
 
-function formatMessage(statistics, test) {
+function formatMessage(testCounters, test) {
   if (test.skip) {
-    statistics.skipped++
+    testCounters.skipped++
     return 'Test skipped'
   }
 
   const error = test.error || test.failure
   if (!error) {
-    statistics.passed++
+    testCounters.passed++
     return 'Test passed'
   }
-  statistics.failed++
+  testCounters.failed++
 
   let errorMessage = '\n\n```\n' + error.message + '\n```'
 
