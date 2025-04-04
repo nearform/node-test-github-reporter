@@ -1,10 +1,14 @@
 <h2>Node.js Test Results</h2>
-<table><tr><th>Passed</th><th>Failed</th><th>Skipped</th><th>Duration</th></tr><tr><td>1</td><td>2</td><td>0</td><td>161ms</td></tr></table>
+<table><tr><th>Passed</th><th>Failed</th><th>Skipped</th><th>Duration</th></tr><tr><td>1</td><td>2</td><td>1</td><td>161ms</td></tr></table>
 <h3>Details</h3>
 <details>
   <summary>:x: calls a nonexistent method</summary>
   <blockquote>
-    nonexistentMethod is not defined
+    
+
+```
+nonexistentMethod is not defined
+```
 
 Stack:
 ```
@@ -31,10 +35,14 @@ TestContext.<anonymous> (file://test/resources/sample-tests/broken.test.js:5:3)
 <details>
   <summary>:x: fails</summary>
   <blockquote>
-    Expected values to be strictly equal:
+    
+
+```
+Expected values to be strictly equal:
 
 1 !== 2
 
+```
 
 Stack:
 ```

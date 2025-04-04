@@ -16,6 +16,12 @@ export default async function* githubSummaryReporter(source) {
   const report = await parseReport(source)
   const tests = report.tests
 
+  const testCounters = {
+    passed: 0,
+    failed: 0,
+    skipped: 0
+  }
+
   const tableHeader = [
     { data: 'Passed', header: true },
     { data: 'Failed', header: true },
@@ -23,18 +29,14 @@ export default async function* githubSummaryReporter(source) {
     { data: 'Duration', header: true }
   ]
 
+  const reportDetails = testDetails(testCounters, { tests: tests })
+
   const tableRow = [
-    `${tests.filter(s => !s.error && !s.failure && !s.skip).length}`,
-    `${tests.filter(s => s.error || s.failure).length}`,
-    `${tests.filter(s => s.skip).length}`,
+    `${testCounters.passed}`,
+    `${testCounters.failed}`,
+    `${testCounters.skipped}`,
     `${parseInt(report.duration)}ms`
   ]
-
-  const reportDetails = tests
-    .map(test =>
-      formatDetails(`${statusEmoji(test)} ${test.name}`, testDetails(test))
-    )
-    .join('\n')
 
   summary
     .addHeading('Node.js Test Results', 2)
@@ -46,29 +48,35 @@ export default async function* githubSummaryReporter(source) {
   yield ''
 }
 
-function testDetails(test) {
+function testDetails(testCounters, test) {
   if (!test.tests.length) {
-    return formatMessage(test)
+    return formatMessage(testCounters, test)
   }
 
   return test.tests
     .map(test =>
-      formatDetails(`${statusEmoji(test)} ${test.name}`, testDetails(test))
+      formatDetails(
+        `${statusEmoji(test)} ${test.name}`,
+        testDetails(testCounters, test)
+      )
     )
     .join('\n')
 }
 
-function formatMessage(test) {
+function formatMessage(testCounters, test) {
   if (test.skip) {
+    testCounters.skipped++
     return 'Test skipped'
   }
 
   const error = test.error || test.failure
   if (!error) {
+    testCounters.passed++
     return 'Test passed'
   }
+  testCounters.failed++
 
-  let errorMessage = error.message
+  let errorMessage = '\n\n```\n' + error.message + '\n```'
 
   if (test.diagnostic) {
     errorMessage += `\n\n${test.diagnostic}`
