@@ -29,7 +29,7 @@ export default async function* githubSummaryReporter(source) {
     { data: 'Duration', header: true }
   ]
 
-  const reportDetails = testDetails(testCounters, {tests: tests})
+  const reportDetails = testDetails(testCounters, { tests: tests })
 
   const tableRow = [
     `${testCounters.passed}`,
