@@ -136,7 +136,6 @@ export function getSafePath(path) {
 
 export function getRelativeFilePath(path) {
   const filePath = getSafePath(path)
-  // Strip leading slash to to ensure GitHub displays the annotation: https://github.com/nearform/node-test-github-reporter/issues/286
   return new URL(filePath).pathname
     .replace(workspacePrefixRegex, '')
     .replace(/^\//, '')
