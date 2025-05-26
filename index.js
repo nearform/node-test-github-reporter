@@ -135,11 +135,7 @@ export function getSafePath(path) {
 }
 
 export function getRelativeFilePath(path) {
-  console.log('DEBUG path:', path)
   const filePath = getSafePath(path)
-  console.log('DEBUG filePath:', filePath)
-  console.log('DEBUG URL.pathname:', new URL(filePath).pathname)
-  console.log('DEBUG workspace:', workspace)
   return new URL(filePath).pathname
     .replace(workspacePrefixRegex, '')
     .replace(/^\//, '')
