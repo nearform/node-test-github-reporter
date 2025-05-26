@@ -16,8 +16,8 @@ describe('File Path', () => {
   })
 
   it('should not error with file path without file:// prefix', () => {
-    const filePath = '/path/to/file.js'
-    const actualUrl = getRelativeFilePath(filePath)
-    assert.equal(actualUrl, filePath)
+    const expected = 'path/to/file.js'
+    const actualUrl = getRelativeFilePath('/path/to/file.js')
+    assert.equal(actualUrl, expected)
   })
 })
