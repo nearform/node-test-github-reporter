@@ -30,7 +30,7 @@
   },
   "homepage": "https://github.com/nearform/node-test-github-reporter#readme",
   "dependencies": {
-    "@actions/core": "^2.0.1",
+    "@actions/core": "^3.0.0",
     "error-stack-parser": "^2.1.4",
     "node-test-parser": "^3.0.0",
     "stack-utils": "^2.0.6"
