@@ -13,7 +13,7 @@ jobs:
   setup:
     runs-on: ubuntu-latest
     steps:
-      - uses: nearform-actions/github-action-notify-release@v1
+      - uses: nearform-actions/github-action-notify-release@v2
     permissions:
       issues: write
       contents: read
